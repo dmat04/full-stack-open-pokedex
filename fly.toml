@@ -1,0 +1,21 @@
+# fly.toml app configuration file generated for autumn-rain-6245 on 2024-04-25T20:26:41+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "autumn-rain-6245"
+primary_region = "waw"
+
+[env]
+  PORT = "3000"
+
+[processes]
+  app = "node app.js"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
