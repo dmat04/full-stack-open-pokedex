@@ -37,6 +37,7 @@ jobs:
   tag_release:
     needs: [simple_deployment_piepline]
     runs-on: ubuntu-20.04
+    if: ${{ ! contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
