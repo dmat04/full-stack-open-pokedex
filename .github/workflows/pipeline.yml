@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.58.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
