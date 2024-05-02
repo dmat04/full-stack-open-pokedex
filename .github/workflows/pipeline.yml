@@ -56,5 +56,5 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           nodetail: true
-          status: Sucess
+          status: Success
           title: A new version of Pokedex has just deployed
