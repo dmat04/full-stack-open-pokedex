@@ -34,6 +34,11 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Failed build discord notification
+        if: ${{ ! sucess() }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_piepline]
     runs-on: ubuntu-20.04
@@ -45,3 +50,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: patch
+      - name: Send discord notification
+        if: ${{ sucess() }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
+          status: Sucess
+          title: A new version of Pokedex has just deployed
